@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: True
+  become: true
+  tasks:
+
+## Enable EPEL8
+  - name: Enable EPEL Repository on Oracle Linux 8
+    ansible.builtin.dnf:
+      name: epel-release
+      state: latest
+    when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] >= '8'
+
+## Install wget, tar and unzip
+  - name: Install wget, tar and unzip
+    ansible.builtin.dnf:
+      name:
+        - wget
+        - tar
+        - unzip
+      state: latest
+    when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] >= '8'
+
+## Disable SELinux
+  - name: Disable SELinux
+    ansible.posix.selinux:
+      state: disabled
+    when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] >= '8'
