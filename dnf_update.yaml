@@ -1,6 +1,9 @@
-- name: Update system
-  hosts:
-    - web
+---
+- hosts: all
+  gather_facts: True
+  become: true
+
+## Update system with DNF
   tasks:
     - name: Perform DNF Update
       dnf:

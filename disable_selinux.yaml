@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: True
+  become: true
+  tasks:
+
+## Disable SELinux
+  - name: Disable SELinux
+    ansible.posix.selinux:
+      state: disabled
+    when: ansible_facts['os_family'] == 'RedHat' and ansible_facts ['distribution_major_version'] >= '8'

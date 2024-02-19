@@ -3,6 +3,8 @@
   gather_facts: True
   become: true
   tasks:
+  
+## Enable EPEL repository
   - name: Enable EPEL Repository on Oracle Linux 8
     dnf:
       name: epel-release
