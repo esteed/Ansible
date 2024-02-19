@@ -1,0 +1,8 @@
+- name: Update system
+  hosts:
+    - web
+  tasks:
+    - name: Perform DNF Update
+      dnf:
+        name: "*"
+        state: latest
